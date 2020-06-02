@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import CountryList from './components/CountryList/CountryList';
 
 //to create more functions used a class
 class App extends React.Component {
@@ -22,15 +23,13 @@ class App extends React.Component {
        if(data.length)
        this.setState(prevState => (
          //length-1 use to get latest data of that country
-         {stats:prevState.stats.concat(data[data.length - 1])}))
+         {stats:prevState.stats.concat({...data[data.length - 1],CountryCode:country.ISO2})}) )
      })
   }
   render(){
     return (
       <div className="App">
-        {
-          this.state.stats.map(country => <h1>{country.Country}</h1>)
-        }
+        <CountryList stats = {this.state.stats}/>
       </div>
     )
   }
