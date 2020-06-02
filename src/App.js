@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 //to create more functions used a class
@@ -7,27 +6,31 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      name:'Sri Lanka'
+      countries:[],
+      stats:[] 
     }
+  }
+  async componentDidMount(){
+     const resp = await fetch('https://api.covid19api.com/countries')
+     const countries = await resp.json()
+     this.setState({countries})
+     this.state.countries.forEach(async country => {
+       const resp = await fetch(`https://api.covid19api.com/total/country/${country.Slug}`)
+       const data = await resp.json()
+
+       //if statement use to remove countries that have no data. 
+       if(data.length)
+       this.setState(prevState => (
+         //length-1 use to get latest data of that country
+         {stats:prevState.stats.concat(data[data.length - 1])}))
+     })
   }
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {this.state.name}
-          </a><br/>
-          <button onClick={() => this.setState({name:'India'})}>Change Name</button>
-        </header>
+        {
+          this.state.stats.map(country => <h1>{country.Country}</h1>)
+        }
       </div>
     )
   }
