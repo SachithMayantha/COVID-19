@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import CountryList from './components/CountryList/CountryList';
+import SearchBox from './components/SearchBox/SearchBox';
 
 //to create more functions used a class
 class App extends React.Component {
@@ -8,7 +9,8 @@ class App extends React.Component {
     super();
     this.state = {
       countries:[],
-      stats:[] 
+      stats:[],
+      searchField: ''
     }
   }
   async componentDidMount(){
@@ -27,9 +29,15 @@ class App extends React.Component {
      })
   }
   render(){
+    const {stats,searchField} = this.state
+    const filteredCountries = stats.filter(country =>(
+      country.Country.toLowerCase().includes(searchField.toLowerCase())
+    ))
     return (
-      <div className="App">
-        <CountryList stats = {this.state.stats}/>
+      <div className="App"> 
+        <SearchBox placeholder="Enter country name.."
+         handleChange={(e)=>this.setState({searchField:e.target.value})}/>
+        <CountryList stats = {filteredCountries}/>
       </div>
     )
   }
