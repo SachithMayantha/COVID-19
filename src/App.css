@@ -1,9 +1,9 @@
 .App {
-  width: 95%;
+  width: 97%;
   display:flex;
   flex-direction: column;
   margin: 0 auto;
   align-items: center;
-  background: rgba(194, 170, 154, 0.541);
+  background-color:  rgb(245, 244, 248);
 }
 

@@ -28,6 +28,9 @@ class App extends React.Component {
          {stats:prevState.stats.concat({...data[data.length - 1],CountryCode:country.ISO2})}) )
      })
   }
+  handleChange = (e) => {
+    this.setState({searchField:e.target.value})
+  }
   render(){
     const {stats,searchField} = this.state
     const filteredCountries = stats.filter(country =>(
@@ -35,9 +38,11 @@ class App extends React.Component {
     ))
     return (
       <div className="App"> 
-        <SearchBox placeholder="Enter country name.."
-         handleChange={(e)=>this.setState({searchField:e.target.value})}/>
-        <CountryList stats = {filteredCountries}/>
+        <SearchBox placeholder="Enter country name..."
+        handleChange={this.handleChange}/>
+        <CountryList stats = {filteredCountries}/><br></br>
+        <footer><b>Owner - sachithfernando599@gmail.com</b></footer>
+        <br></br>
       </div>
     )
   }
