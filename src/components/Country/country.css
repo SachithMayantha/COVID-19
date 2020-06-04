@@ -4,15 +4,18 @@
     flex-direction: column;
     align-items: center;
     background: gray;
-    background: -webkit-linear-gradient(to right, rgb(105, 18, 219), rgb(174, 125, 214));
-    background: linear-gradient(to right, rgb(105, 18, 219), rgb(174, 125, 214));
+    background: -webkit-linear-gradient(to right, rgb(199, 219, 18), rgb(174, 125, 214));
+    background: linear-gradient(to right, rgb(158, 129, 182), rgb(137, 79, 212));
 
     border-radius: 10px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.6s ease-in-out;
     cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
 }
 .country:hover{
     transform: scale(1.1);
+    background: linear-gradient(to left, rgb(158, 129, 182), rgb(137, 79, 212));
 }
 .country > img{
     width:33%;
